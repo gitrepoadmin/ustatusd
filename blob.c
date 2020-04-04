@@ -29,7 +29,7 @@ void blobmsg_add_iface(struct blob_buf *bbuf, char *name, int index)
 
 	if (!ifname)
 		return;
-	blobmsg_add_string(&b, name, ifname);
+	blobmsg_add_string(&bbuf, name, ifname);
 }
 
 void blobmsg_add_iftype(struct blob_buf *bbuf, const char *name, const uint32_t iftype)
@@ -37,7 +37,7 @@ void blobmsg_add_iftype(struct blob_buf *bbuf, const char *name, const uint32_t 
 	if (iftype_string[iftype])
 		blobmsg_add_string(&b, name, iftype_string[iftype]);
 	else
-		blobmsg_add_u32(&b, name, iftype);
+		blobmsg_add_u32(&bbuf, name, iftype);
 }
 
 void blobmsg_add_ipv4(struct blob_buf *bbuf, const char *name, const uint8_t* addr)
@@ -45,7 +45,7 @@ void blobmsg_add_ipv4(struct blob_buf *bbuf, const char *name, const uint8_t* ad
 	char ip[16];
 
 	snprintf(ip, sizeof(ip), "%d.%d.%d.%d", addr[0], addr[1], addr[2], addr[3]);
-	blobmsg_add_string(&b, name, ip);
+	blobmsg_add_string(&bbuf, name, ip);
 }
 
 void blobmsg_add_ipv6(struct blob_buf *bbuf, const char *name, const uint16_t* addr)
@@ -55,7 +55,7 @@ void blobmsg_add_ipv6(struct blob_buf *bbuf, const char *name, const uint16_t* a
 	snprintf(ip, sizeof(ip), "%x:%x:%x:%x:%x:%x:%x:%x",
 		ntohs(addr[0]), ntohs(addr[1]), ntohs(addr[2]), ntohs(addr[3]),
 		ntohs(addr[4]), ntohs(addr[5]), ntohs(addr[6]), ntohs(addr[7]));
-	blobmsg_add_string(&b, name, ip);
+	blobmsg_add_string(&bbuf, name, ip);
 }
 
 void blobmsg_add_mac(struct blob_buf *bbuf, const char *name, const uint8_t* addr)
@@ -64,5 +64,5 @@ void blobmsg_add_mac(struct blob_buf *bbuf, const char *name, const uint8_t* add
 
 	snprintf(mac, sizeof(mac), "%02x:%02x:%02x:%02x:%02x:%02x",
 		addr[0], addr[1], addr[2], addr[3], addr[4], addr[5]);
-	blobmsg_add_string(&b, name, mac);
+	blobmsg_add_string(&bbuf, name, mac);
 }
